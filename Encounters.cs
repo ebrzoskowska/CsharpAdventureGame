@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -15,7 +15,6 @@ namespace AdventureGame
             Console.WriteLine("");
             Console.WriteLine("A furious beast appeared in front of you out of nowhere... ");
             Console.WriteLine("");
-            Console.ReadKey();
             combat(true, "", 0, 0);
         }
 
@@ -36,7 +35,7 @@ namespace AdventureGame
             Console.WriteLine("You see your brother, flash and bones, with furious face and ready");
             Console.WriteLine("for fight....");
             Console.WriteLine("");
-            combat(false, "Serge the Destroyer", 1, 5);
+            combat(false, "Serge the Destroyer", 1, 10);
         }
 
         //Enemies for random basic encounters
@@ -56,7 +55,6 @@ namespace AdventureGame
             return "Ogre";
         }
 
-
         //Encounter Tools
         public static void combat(bool random, string name, int power, int health)
         {
@@ -68,8 +66,8 @@ namespace AdventureGame
             if (random)
             {
                 n = enemyName();
-                p = rnd.Next(0, 8);
-                h = rnd.Next(0, 10);
+                p = rnd.Next(0, 5);
+                h = rnd.Next(0, 6);
             }
             else
             {
@@ -89,14 +87,15 @@ namespace AdventureGame
                 Console.WriteLine("                            ");
                 Console.WriteLine("****************************");
                 Console.WriteLine("Your health: " + Program.currentPlayer.health);
+                Console.WriteLine("");               
+                Console.WriteLine(n + " health: " + h);
                 Console.WriteLine("");
-                Console.WriteLine(n);
-                Console.WriteLine("Enemy health: " + h);
                 string input = Console.ReadLine();
 
                 if (input.ToLower() == "o" || input.ToLower() == "offense")
                 {
                     //attack
+                    Console.WriteLine("");
                     Console.WriteLine("With a rush, you're trying to surge ahead but all you got are only bare hands.");
                     Console.WriteLine("You threw up your forearms like an offensive lineman blocking a defensive back, you");
                     Console.WriteLine("slipped to the side, pushed him down and away, caught his head, and rolled him into the floor.");
@@ -107,6 +106,7 @@ namespace AdventureGame
                     damage = rnd.Next(0, 3);
                     int attack = rnd.Next(0, 3);
                     Console.WriteLine("You lose " + damage + " health and deal " + attack + " damage");
+                    Console.WriteLine("");
                     Console.WriteLine("press ENTER to continue");
                     Program.currentPlayer.health -= damage;
                     h -= attack;
@@ -115,6 +115,7 @@ namespace AdventureGame
                 else if (input.ToLower() == "d" || input.ToLower() == "deffense")
                 {
                     //deffense
+                    Console.WriteLine("");
                     Console.WriteLine("As the " + n + " prepares to strike you stepped back and balancing your weight prepared to defense.");
                     Console.WriteLine("He slapped you with his open left hand full across the face. Your headache is like a starburst.");
                     Console.WriteLine("");
@@ -123,9 +124,15 @@ namespace AdventureGame
                     damage = rnd.Next(0, 3);
                     int attack = rnd.Next(0, 2);
                     Console.WriteLine("You lose " + damage + " health and deal " + attack + " damage");
+                    Console.WriteLine("");
                     Console.WriteLine("press ENTER to continue");
                     Program.currentPlayer.health -= damage;
                     h -= attack;
+                }
+                else
+                {
+                    Console.WriteLine("Let's try with 'o' or 'd' letters... ");
+                    Console.WriteLine("press ENTER to continue");
                 }
             }
 
@@ -134,6 +141,7 @@ namespace AdventureGame
                 //Player is dead
                 Console.ReadLine();
                 Console.Clear();
+                Console.WriteLine("");
                 Console.WriteLine("You took a deep breath. It hurt your ribcage. You exhaled, inhaled again, and tried");
                 Console.WriteLine("to inched your arms under you and pushed yourself up on your hands and knees, it did not work.");
                 Console.WriteLine("Your head swam. You felt your stomach tighten and you threw up, which hurt the ribs even more.");
@@ -146,10 +154,12 @@ namespace AdventureGame
                 //Player wins
                 Console.ReadKey();
                 Console.Clear();
+                Console.WriteLine("");
                 Console.WriteLine("Your hands are sore, you slowly got yourself together. Everything blurred for a minute,");
                 Console.WriteLine("then came back into focus again. You inhaled fresh air and felt a little steadier.");
                 Console.WriteLine("But the most importanly you smashed your enemy!");
-                Console.WriteLine("You earned " + c + " points!");
+                Console.WriteLine("");
+                Console.WriteLine("You earned " + c + " coins!");
                 Program.currentPlayer.coins += c;
                 Console.ReadLine();
                 Console.Clear();
